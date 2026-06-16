@@ -1,0 +1,13 @@
+numpy
+pandas
+opencv-python
+torch
+torchvision
+tqdm
+Pillow
+joblib
+requests
+scikit-learn
+hydra-core
+omegaconf
+iopath

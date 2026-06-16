@@ -1,0 +1,59 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+develop-eggs/
+.installed.cfg
+pip-wheel-metadata/
+
+# ---- Virtual environments ----
+venv/
+.venv/
+env/
+ENV/
+.env
+
+# ---- IDE / Editor ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---- PyCharm ----
+.idea/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- Logs / temp / runtime outputs ----
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ---- Generated evaluation outputs (keep folder structure, ignore content) ----
+result/*.csv
+result/*.txt
+result/*.json
+!result/food_classifier.pth
+!result/food_classifier_classes.txt
+
+# ---- Large model weights are tracked via Git LFS (NOT ignored) ----
+# checkpoints/*.pth
+# checkpoints/*.pt
+# result/*.pth
+# models/rf_regressors/*.pkl
+
+# ---- OS junk ----
+ehthumbs.db
+desktop.ini
