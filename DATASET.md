@@ -15,7 +15,6 @@
 To keep the GitHub repository lightweight and enforce academic access control, the complete dataset archive (**256.37 MB**) is hosted on Google Drive with **Restricted** sharing permissions and **ZIP password encryption**:
 
 - **Google Drive Link (Restricted):** [https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing](https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing)
-- **SHA-256 Checksum:** [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
 
 ### Archive Contents
 

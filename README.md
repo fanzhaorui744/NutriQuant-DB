@@ -142,13 +142,11 @@ python main.py
 The complete **NutriQuant-DB** image dataset (**786 cafeteria images**, **2,094 annotated instances** across **10 cooked-food categories**, CVAT XML & CSV annotations, **256.37 MB**) is hosted on Google Drive with **Restricted access** and **password encryption**:
 
 - **Google Drive (Restricted Access):** [`NutriQuant-DB_images_protected.zip`](https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing)
-- **SHA-256 Checksum:** [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
 - **Dataset Card & Format Spec:** [`DATASET.md`](DATASET.md)
 
 ### How to Request Access & Decryption Password
 1. Click the Google Drive link above and submit a **Request access** request (or email `fanzhaorui744@gmail.com` / the corresponding author in the manuscript) stating your **name, institution, and academic research purpose**.
-2. Once approved, download `NutriQuant-DB_images_protected.zip` and verify its SHA-256 checksum against `dataset/NutriQuant-DB_images_protected.zip.sha256`.
-3. Use the decryption password provided upon approval to extract the archive.
+2. Once approved, download `NutriQuant-DB_images_protected.zip` and use the decryption password provided upon approval to extract the archive.
 
 *(4 curated demo sample images are included in `data/test_images/` so the interactive demo works immediately after cloning.)*
 
@@ -176,7 +174,7 @@ The complete **NutriQuant-DB** image dataset (**786 cafeteria images**, **2,094 
 |- result/                         # Fine-tuned 10-class ResNet50 weights & class list
 |- data/test_images/               # 4 curated real cafeteria samples for demo
 |- data/ground_truth.csv           # Electronic-scale ground truth for the 4 demo samples
-|- dataset/                        # Dataset access link & SHA-256 checksum
+|- dataset/                        # Google Drive access link for the full 786-image dataset
 |- assets/demo_walkthrough.gif     # Animated 6-stage walkthrough preview
 |- vendor/                         # Bundled SAM 2 & Depth Anything V2 source modules
 `- requirements_demo.txt           # Python package dependencies
