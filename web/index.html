@@ -3,252 +3,241 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NutriQuant — 6-Stage Monocular Food Portion & Energy Demo</title>
+  <title>NutriQuant — Interactive 6-Stage Step-by-Step Demo</title>
   <style>
     :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --border: #dfe5ef;
-      --text: #162033;
-      --muted: #5a677d;
-      --accent: #1d6feb;
-      --accent-soft: #ebf3ff;
-      --green: #188038;
-      --green-soft: #e8f5e9;
-      --amber: #b06000;
-      --amber-soft: #fef3e0;
+      --bg: #0b1120;
+      --panel: #111a2e;
+      --panel-2: #17233d;
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.35);
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --amber: #f59e0b;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #172554 0%, var(--bg) 52%);
       color: var(--text);
-      line-height: 1.5;
+      min-height: 100vh;
     }
-    .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px 48px; }
-    header {
-      background: linear-gradient(135deg, #132542 0%, #1d4ed8 100%);
-      color: #fff;
-      padding: 26px 28px;
-      border-radius: 14px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(19, 37, 66, 0.14);
-    }
-    header h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; }
-    header p { margin: 0; opacity: 0.92; font-size: 14px; }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .pill {
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 12px;
-    }
-    .grid-2 { display: grid; grid-template-columns: 380px 1fr; gap: 20px; align-items: start; }
-    @media (max-width: 960px) { .grid-2 { grid-template-columns: 1fr; } }
-    .card {
-      background: var(--card);
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 22px 20px 44px; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+      padding: 18px 22px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.55), rgba(15, 23, 42, 0.9));
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
       margin-bottom: 18px;
     }
-    .card h2 { margin: 0 0 12px; font-size: 16px; font-weight: 700; }
+    .topbar h1 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+    .topbar p { margin: 4px 0 0; font-size: 13px; color: #cbd5e1; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      background: rgba(59, 130, 246, 0.16); border: 1px solid rgba(96, 165, 250, 0.3); color: #bfdbfe;
+    }
+
+    .layout { display: grid; grid-template-columns: 340px 1fr; gap: 18px; align-items: start; }
+    @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); margin-bottom: 16px;
+    }
+    .card-title { font-size: 14px; font-weight: 700; margin: 0 0 12px; color: #e2e8f0; display: flex; align-items: center; gap: 8px; }
+
     .drop-zone {
-      border: 2px dashed #b9c7dc;
-      border-radius: 10px;
-      padding: 22px 14px;
-      text-align: center;
-      cursor: pointer;
-      background: #fafcff;
-      transition: border-color 0.2s, background 0.2s;
+      border: 1.5px dashed rgba(96, 165, 250, 0.45); border-radius: 12px; padding: 18px 12px;
+      text-align: center; cursor: pointer; background: rgba(30, 41, 59, 0.5); transition: 0.2s;
     }
-    .drop-zone:hover, .drop-zone.drag { border-color: var(--accent); background: var(--accent-soft); }
+    .drop-zone:hover, .drop-zone.drag { border-color: var(--accent); background: rgba(59, 130, 246, 0.12); }
     .drop-zone input { display: none; }
+    .drop-zone strong { font-size: 13px; display: block; }
+    .drop-zone small { font-size: 11.5px; color: var(--muted); }
+
+    .samples-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+    .sample-btn {
+      background: var(--panel-2); border: 1.5px solid var(--border); border-radius: 10px;
+      overflow: hidden; cursor: pointer; padding: 0; text-align: left; color: var(--text); transition: 0.18s;
+    }
+    .sample-btn:hover { border-color: rgba(96, 165, 250, 0.6); transform: translateY(-1px); }
+    .sample-btn.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+    .sample-btn img { width: 100%; height: 74px; object-fit: cover; display: block; }
+    .sample-btn span { display: block; padding: 5px 7px; font-size: 11px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
     .field { margin-top: 12px; }
-    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
-    .field input, .field select {
-      width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;
-      font-size: 13px; background: #fff;
+    .field label { display: block; font-size: 11.5px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .field input {
+      width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: #0f172a; color: var(--text); font-size: 13px;
     }
+
     .btn {
-      width: 100%; margin-top: 14px; padding: 11px 16px; border: none; border-radius: 9px;
-      background: var(--accent); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      border: none; border-radius: 10px; padding: 10px 14px; font-size: 13.5px; font-weight: 600;
+      cursor: pointer; transition: 0.18s;
     }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .samples-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;
-      max-height: 240px; overflow-y: auto;
+    .btn-primary { width: 100%; margin-top: 14px; background: linear-gradient(135deg, #2563eb, #0284c7); color: #fff; box-shadow: 0 6px 18px rgba(37, 99, 235, 0.32); }
+    .btn-primary:hover:not(:disabled) { filter: brightness(1.08); }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-step { background: var(--panel-2); color: #e2e8f0; border: 1px solid var(--border); padding: 8px 14px; font-size: 13px; }
+    .btn-step:hover:not(:disabled) { border-color: var(--accent); background: rgba(59, 130, 246, 0.16); }
+    .btn-step.next { background: var(--accent); color: #fff; border-color: transparent; }
+    .btn-step:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Stepper Bar */
+    .stepper {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 14px;
     }
-    .sample-thumb {
-      border: 2px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer;
-      background: #fff; padding: 0; text-align: left;
+    @media (max-width: 900px) { .stepper { grid-template-columns: repeat(3, 1fr); } }
+    .step-node {
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 8px 9px; cursor: pointer; text-align: left; transition: 0.2s; color: var(--muted);
     }
-    .sample-thumb.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(29,111,235,0.2); }
-    .sample-thumb img { width: 100%; height: 64px; object-fit: cover; display: block; }
-    .sample-thumb span { display: block; font-size: 10px; padding: 3px 5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .stages-bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 18px; }
-    @media (max-width: 960px) { .stages-bar { grid-template-columns: repeat(2, 1fr); } }
-    .stage-box {
-      background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+    .step-node .sn-num { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .step-node .sn-name { font-size: 12px; font-weight: 700; margin-top: 2px; color: #cbd5e1; }
+    .step-node.done { border-color: rgba(16, 185, 129, 0.45); }
+    .step-node.done .sn-num { color: var(--green); }
+    .step-node.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(6, 182, 212, 0.22));
+      border-color: #60a5fa; box-shadow: 0 0 0 2px var(--accent-glow);
     }
-    .stage-box .st-num { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
-    .stage-box .st-title { font-size: 13px; font-weight: 700; margin: 2px 0; }
-    .stage-box .st-meta { font-size: 11px; color: var(--muted); }
-    .vis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    @media (max-width: 960px) { .vis-grid { grid-template-columns: 1fr; } }
-    .vis-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #0f172a; }
-    .vis-card .vis-head { background: #f8fafc; padding: 8px 12px; font-size: 12px; font-weight: 700; border-bottom: 1px solid var(--border); color: var(--text); }
-    .vis-card img { width: 100%; height: 260px; object-fit: contain; display: block; background: #111827; }
-    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-    @media (max-width: 720px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-    .kpi { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-    .kpi .k-label { font-size: 11px; color: var(--muted); font-weight: 600; }
-    .kpi .k-val { font-size: 20px; font-weight: 700; margin-top: 2px; }
-    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-    th, td { padding: 8px 8px; border-bottom: 1px solid var(--border); text-align: left; }
-    th { background: #f8fafc; font-weight: 700; color: var(--muted); font-size: 11.5px; }
-    .badge { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-    .badge-on { background: var(--green-soft); color: var(--green); }
-    .badge-off { background: var(--amber-soft); color: var(--amber); }
-    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-    .status-msg { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
-    .error-msg { color: #b42318; font-weight: 600; }
+    .step-node.active .sn-num { color: #93c5fd; }
+    .step-node.active .sn-name { color: #fff; }
+
+    /* Stage Viewport */
+    .stage-controls {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .stage-heading h2 { margin: 0; font-size: 17px; }
+    .stage-heading p { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+    .ctrl-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .viewport-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 860px) { .viewport-grid { grid-template-columns: 1fr; } }
+
+    .canvas-box {
+      position: relative; background: #070b14; border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; min-height: 340px; display: flex; align-items: center; justify-content: center;
+    }
+    .canvas-box img { width: 100%; max-height: 430px; object-fit: contain; display: block; transition: opacity 0.28s ease; }
+    .canvas-badge {
+      position: absolute; top: 12px; left: 12px; padding: 5px 11px; border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 11.5px; font-weight: 600; backdrop-filter: blur(6px);
+    }
+
+    .detail-panel {
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px;
+      min-height: 340px;
+    }
+    .detail-panel h3 { margin: 0 0 10px; font-size: 14px; color: #e2e8f0; }
+
+    .chip-list { display: flex; flex-direction: column; gap: 9px; }
+    .item-chip {
+      background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+      animation: fadeSlide 0.28s ease both;
+    }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .chip-top { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; }
+    .chip-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+    .gate-pill { padding: 2px 7px; border-radius: 999px; font-size: 10.5px; font-weight: 700; }
+    .gate-on { background: rgba(16, 185, 129, 0.18); color: #6ee7b7; }
+    .gate-off { background: rgba(245, 158, 11, 0.18); color: #fcd34d; }
+
+    .bar-track {
+      height: 8px; border-radius: 999px; background: rgba(148, 163, 184, 0.2); overflow: hidden; margin-top: 6px;
+      display: flex;
+    }
+    .bar-geo { background: linear-gradient(90deg, #3b82f6, #60a5fa); height: 100%; }
+    .bar-dep { background: linear-gradient(90deg, #f97316, #fbbf24); height: 100%; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+    .kpi { background: rgba(15, 23, 42, 0.72); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+    .kpi .kl { font-size: 11px; color: var(--muted); }
+    .kpi .kv { font-size: 19px; font-weight: 700; margin-top: 2px; color: #fff; }
+    .gt-box {
+      padding: 9px 11px; border-radius: 9px; background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3); font-size: 12px; color: #a7f3d0; margin-bottom: 10px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+    th, td { padding: 7px 6px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { color: var(--muted); font-size: 11px; }
+    .status-line { margin-top: 10px; font-size: 12px; color: var(--muted); min-height: 18px; }
+    .err { color: #fca5a5; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>NutriQuant: Single-Image 6-Stage Portion, Mass &amp; Energy Demo</h1>
-      <p>Local inference dashboard running Stage 1 (Scale Recovery) &rarr; Stage 2 (SAM 2) &rarr; Stage 3 (ResNet50) &rarr; Stage 4 (Depth Anything V2) &rarr; Stage 5 (DKDF Fusion) &rarr; Stage 6 (Mass &amp; USDA SR28 Energy).</p>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>NutriQuant — Interactive 6-Stage Portion, Mass &amp; Energy Demo</h1>
+        <p>Click <strong>Next Step &rarr;</strong> to step dynamically from raw photo &rarr; Scale &rarr; SAM 2 &rarr; ResNet50 &rarr; Depth Anything V2 &rarr; DKDF &rarr; Mass &amp; Energy.</p>
+      </div>
       <div class="pill-row">
-        <span class="pill" id="runtimePill">Detecting local compute...</span>
-        <span class="pill">10 Cooked-Food Classes</span>
+        <span class="pill" id="runtimePill">Connecting...</span>
         <span class="pill">DKDF &lambda;=5.5 | Gate p&ge;0.70</span>
       </div>
-    </header>
+    </div>
 
-    <div class="grid-2">
+    <div class="layout">
       <div>
         <div class="card">
-          <h2>1. Input Photo or Real Dataset Sample</h2>
+          <div class="card-title">1. Choose Real Sample or Upload Photo</div>
           <div class="drop-zone" id="dropZone">
             <input type="file" id="fileInput" accept="image/*" />
-            <strong>Click to upload a cafeteria meal photo</strong>
-            <div style="font-size:12px; color:var(--muted); margin-top:4px;">or drag and drop JPG / PNG here</div>
+            <strong>Upload Meal Photo</strong>
+            <small>Drag &amp; drop JPG/PNG or click to browse</small>
           </div>
 
           <div class="field">
-            <label>Or select a real NutriQuant-DB sample image:</label>
+            <label>Verified NutriQuant-DB Samples:</label>
             <div class="samples-grid" id="samplesGrid"></div>
           </div>
 
           <div class="field">
-            <label for="scaleInput">Optional Planar Scale Override (px/cm)</label>
-            <input type="number" step="0.01" id="scaleInput" placeholder="Auto (fiducial grid / sample metadata / fallback)" />
+            <label for="scaleInput">Planar Scale Override (px/cm)</label>
+            <input type="number" step="0.01" id="scaleInput" placeholder="Auto (grid / metadata / fallback)" />
           </div>
 
-          <div class="field" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div>
-              <label for="maxItemsInput">Max Food Items</label>
-              <input type="number" id="maxItemsInput" value="8" min="1" max="20" />
-            </div>
-            <div>
-              <label for="minConfInput">Min Classifier Conf</label>
-              <input type="number" step="0.05" id="minConfInput" value="0.20" min="0" max="0.95" />
-            </div>
-          </div>
-
-          <button class="btn" id="runBtn">Run 6-Stage NutriQuant Pipeline</button>
-          <div class="status-msg" id="statusMsg">Select a real sample or upload an image, then click Run.</div>
+          <button class="btn btn-primary" id="runBtn">Run 6-Stage Pipeline &rarr;</button>
+          <div class="status-line" id="statusMsg">Select a sample or upload a photo, then click Run.</div>
         </div>
       </div>
 
       <div>
-        <div class="stages-bar">
-          <div class="stage-box">
-            <div class="st-num">Stage 1</div>
-            <div class="st-title">Scale Recovery</div>
-            <div class="st-meta" id="st1Meta">&mdash;</div>
-          </div>
-          <div class="stage-box">
-            <div class="st-num">Stage 2</div>
-            <div class="st-title">SAM 2 Masks</div>
-            <div class="st-meta" id="st2Meta">&mdash;</div>
-          </div>
-          <div class="stage-box">
-            <div class="st-num">Stage 3</div>
-            <div class="st-title">ResNet50 Cls</div>
-            <div class="st-meta" id="st3Meta">&mdash;</div>
-          </div>
-          <div class="stage-box">
-            <div class="st-num">Stage 4</div>
-            <div class="st-title">Depth Anything V2</div>
-            <div class="st-meta" id="st4Meta">&mdash;</div>
-          </div>
-          <div class="stage-box">
-            <div class="st-num">Stage 5</div>
-            <div class="st-title">DKDF Fusion</div>
-            <div class="st-meta" id="st5Meta">&lambda;=5.5 | p&ge;0.70</div>
-          </div>
-          <div class="stage-box">
-            <div class="st-num">Stage 6</div>
-            <div class="st-title">Mass &amp; Energy</div>
-            <div class="st-meta" id="st6Meta">&mdash;</div>
-          </div>
-        </div>
-
         <div class="card">
-          <h2>2. Visual Pipeline Outputs (Input / SAM 2 / Depth Anything V2)</h2>
-          <div class="vis-grid">
-            <div class="vis-card">
-              <div class="vis-head">Stage 1: Rectified Input</div>
-              <img id="imgRectified" alt="Rectified input preview" />
+          <div class="stepper" id="stepper"></div>
+
+          <div class="stage-controls">
+            <div class="stage-heading">
+              <h2 id="stageTitle">Step 0: Input Photo</h2>
+              <p id="stageDesc">Select a real cafeteria sample or upload your own photo to start.</p>
             </div>
-            <div class="vis-card">
-              <div class="vis-head">Stage 2 + 3: SAM 2 Masks &amp; Labels</div>
-              <img id="imgSeg" alt="SAM 2 segmentation overlay" />
-            </div>
-            <div class="vis-card">
-              <div class="vis-head">Stage 4: Depth Anything V2 Map</div>
-              <img id="imgDepth" alt="Depth Anything V2 heatmap" />
+            <div class="ctrl-btns">
+              <button class="btn btn-step" id="prevBtn" disabled>&larr; Previous</button>
+              <button class="btn btn-step" id="autoBtn" disabled>Auto Play &#9654;</button>
+              <button class="btn btn-step next" id="nextBtn" disabled>Next Step &rarr;</button>
             </div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>3. Stage 5 &amp; Stage 6 Quantitative Results</h2>
-          <div class="kpi-row">
-            <div class="kpi"><div class="k-label">Total Fused Volume</div><div class="k-val" id="kpiVol">&mdash;</div></div>
-            <div class="kpi"><div class="k-label">Total Predicted Mass</div><div class="k-val" id="kpiMass">&mdash;</div></div>
-            <div class="kpi"><div class="k-label">Total Est. Energy</div><div class="k-val" id="kpiKcal">&mdash;</div></div>
-            <div class="kpi"><div class="k-label">Runtime (6 Stages)</div><div class="k-val" id="kpiTime">&mdash;</div></div>
-          </div>
-
-          <div id="gtBanner" style="display:none; padding:10px 12px; border-radius:8px; background:var(--accent-soft); font-size:12.5px; margin-bottom:14px;"></div>
-
-          <div style="overflow-x:auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Conf (Gate)</th>
-                  <th>Area (cm&sup2;)</th>
-                  <th>V<sub>geo</sub> (cm&sup3;)</th>
-                  <th>V<sub>depth</sub> (cm&sup3;)</th>
-                  <th>q / &alpha;</th>
-                  <th>V&#770; (cm&sup3;)</th>
-                  <th>Density</th>
-                  <th>Mass (g)</th>
-                  <th>Energy (kcal)</th>
-                </tr>
-              </thead>
-              <tbody id="itemsBody">
-                <tr><td colspan="10" style="color:var(--muted); text-align:center;">No results yet.</td></tr>
-              </tbody>
-            </table>
+          <div class="viewport-grid">
+            <div class="canvas-box">
+              <span class="canvas-badge" id="canvasBadge">Input Preview</span>
+              <img id="stageImage" alt="Pipeline visualization" />
+            </div>
+            <div class="detail-panel" id="detailPanel">
+              <h3>Pipeline Telemetry</h3>
+              <p style="font-size:13px; color:var(--muted);">Click <strong>Run 6-Stage Pipeline &rarr;</strong> to compute SAM 2 masks, Depth Anything V2 relative depth, DKDF fusion weights, and USDA SR28 energy.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -256,169 +245,313 @@
   </div>
 
   <script>
+    const STEPS = [
+      { id: 0, short: "Input", title: "Step 0: Input Cafeteria Image", desc: "Raw monocular RGB smartphone photograph before processing." },
+      { id: 1, short: "Scale", title: "Step 1: Perspective & Scale Recovery", desc: "Planar homography rectification and pixel-to-centimeter scale calibration." },
+      { id: 2, short: "SAM 2", title: "Step 2: SAM 2 Instance Segmentation", desc: "Low-contrast CLAHE enhancement followed by SAM 2 candidate mask extraction." },
+      { id: 3, short: "ResNet50", title: "Step 3: ResNet50 Category Recognition", desc: "10-class cooked-food classification with softmax confidence gating (p >= 0.70)." },
+      { id: 4, short: "Depth", title: "Step 4: Depth Anything V2 Estimation", desc: "Affine-invariant inverse relative depth calibrated against plate background & rim." },
+      { id: 5, short: "DKDF", title: "Step 5: Data-Knowledge-Driven Fusion", desc: "Dynamic blending weight alpha combining ellipsoid proxy V_geo and depth V_depth." },
+      { id: 6, short: "Output", title: "Step 6: Mass & USDA SR28 Energy", desc: "Cooked-food density mass conversion and reference energy estimation." },
+    ];
+
     let selectedSample = null;
     let uploadedBase64 = null;
+    let currentPreviewUrl = "";
+    let lastResult = null;
+    let activeStep = 0;
+    let autoTimer = null;
 
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("fileInput");
+    const stepperEl = document.getElementById("stepper");
     const samplesGrid = document.getElementById("samplesGrid");
     const scaleInput = document.getElementById("scaleInput");
     const runBtn = document.getElementById("runBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const autoBtn = document.getElementById("autoBtn");
     const statusMsg = document.getElementById("statusMsg");
 
-    async function init() {
-      try {
-        const hRes = await fetch("/api/health");
-        if (hRes.ok) {
-          const h = await hRes.json();
-          document.getElementById("runtimePill").textContent =
-            `Compute: ${h.runtime.device.toUpperCase()} (${h.runtime.gpu_name})`;
-        }
-      } catch (e) {
-        document.getElementById("runtimePill").textContent = "Compute: local backend";
-      }
-
-      const sRes = await fetch("/api/samples");
-      const sData = await sRes.json();
-      samplesGrid.innerHTML = "";
-      (sData.samples || []).forEach((s, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "sample-thumb";
-        btn.type = "button";
-        btn.innerHTML = `<img src="/api/sample_image?name=${encodeURIComponent(s.filename)}" loading="lazy" /><span>${s.classes.join(", ")} (${s.total_mass_g ?? "?"}g)</span>`;
-        btn.onclick = () => selectSample(s, btn);
-        samplesGrid.appendChild(btn);
-        if (idx === 0) selectSample(s, btn);
+    function buildStepper() {
+      stepperEl.innerHTML = STEPS.map(s => `
+        <button class="step-node" data-step="${s.id}" type="button">
+          <div class="sn-num">${s.id === 0 ? "INPUT" : "STAGE " + s.id}</div>
+          <div class="sn-name">${s.short}</div>
+        </button>
+      `).join("");
+      document.querySelectorAll(".step-node").forEach(btn => {
+        btn.onclick = () => {
+          const idx = parseInt(btn.dataset.step, 10);
+          if (!lastResult && idx > 0) return;
+          stopAuto();
+          setStep(idx);
+        };
       });
     }
 
-    function selectSample(sample, btnEl) {
-      selectedSample = sample.filename;
-      uploadedBase64 = null;
-      document.querySelectorAll(".sample-thumb").forEach(el => el.classList.remove("active"));
-      btnEl.classList.add("active");
-      scaleInput.value = sample.pixel_per_cm || "";
-      document.getElementById("imgRectified").src = `/api/sample_image?name=${encodeURIComponent(sample.filename)}`;
-      statusMsg.textContent = `Selected real sample: ${sample.filename} (${sample.item_count} labeled items, ${sample.total_mass_g} g)`;
-      statusMsg.className = "status-msg";
+    async function init() {
+      buildStepper();
+      if (window.PRECOMPUTED_DEMOS) {
+        document.getElementById("runtimePill").textContent = "Mode: Static Real-Data Preview";
+        loadSampleList(window.PRECOMPUTED_DEMOS.samples);
+        return;
+      }
+      try {
+        const h = await (await fetch("/api/health")).json();
+        document.getElementById("runtimePill").textContent = `Compute: ${h.runtime.device.toUpperCase()} (${h.runtime.gpu_name})`;
+      } catch {
+        document.getElementById("runtimePill").textContent = "Compute: Local Server";
+      }
+      const sData = await (await fetch("/api/samples")).json();
+      loadSampleList(sData.samples || []);
     }
 
+    function loadSampleList(list) {
+      samplesGrid.innerHTML = "";
+      list.forEach((s, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sample-btn";
+        const thumbUrl = s.thumb_data_url || `/api/sample_image?name=${encodeURIComponent(s.filename)}`;
+        btn.innerHTML = `<img src="${thumbUrl}" loading="lazy" /><span>${s.classes.join(", ")} (${s.total_mass_g}g)</span>`;
+        btn.onclick = () => selectSample(s, btn, thumbUrl);
+        samplesGrid.appendChild(btn);
+        if (idx === 0) selectSample(s, btn, thumbUrl);
+      });
+    }
+
+    function selectSample(sample, btnEl, thumbUrl) {
+      stopAuto();
+      selectedSample = sample.filename;
+      uploadedBase64 = null;
+      lastResult = null;
+      currentPreviewUrl = thumbUrl;
+      document.querySelectorAll(".sample-btn").forEach(el => el.classList.remove("active"));
+      btnEl.classList.add("active");
+      scaleInput.value = sample.pixel_per_cm || "";
+      statusMsg.textContent = `Ready: ${sample.filename} (${sample.item_count} items, GT ${sample.total_mass_g} g)`;
+      statusMsg.className = "status-line";
+      setStep(0);
+    }
+
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
     dropZone.onclick = () => fileInput.click();
     dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add("drag"); };
     dropZone.ondragleave = () => dropZone.classList.remove("drag");
-    dropZone.ondrop = (e) => {
-      e.preventDefault();
-      dropZone.classList.remove("drag");
-      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-    };
+    dropZone.ondrop = (e) => { e.preventDefault(); dropZone.classList.remove("drag"); if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); };
     fileInput.onchange = () => { if (fileInput.files.length) handleFile(fileInput.files[0]); };
 
     function handleFile(file) {
+      if (window.PRECOMPUTED_DEMOS) {
+        statusMsg.textContent = "Custom uploads require running `python demo_app.py` locally.";
+        statusMsg.className = "status-line err";
+        return;
+      }
       const reader = new FileReader();
       reader.onload = () => {
+        stopAuto();
         uploadedBase64 = reader.result;
         selectedSample = null;
+        lastResult = null;
+        currentPreviewUrl = uploadedBase64;
         scaleInput.value = "";
-        document.querySelectorAll(".sample-thumb").forEach(el => el.classList.remove("active"));
-        document.getElementById("imgRectified").src = uploadedBase64;
-        statusMsg.textContent = `Loaded custom upload: ${file.name}`;
-        statusMsg.className = "status-msg";
+        document.querySelectorAll(".sample-btn").forEach(el => el.classList.remove("active"));
+        statusMsg.textContent = `Loaded custom photo: ${file.name}`;
+        statusMsg.className = "status-line";
+        setStep(0);
       };
       reader.readAsDataURL(file);
     }
 
     runBtn.onclick = async () => {
-      if (!selectedSample && !uploadedBase64) {
-        statusMsg.textContent = "Please upload an image or pick a real sample first.";
-        statusMsg.className = "status-msg error-msg";
-        return;
+      stopAuto();
+      if (window.PRECOMPUTED_DEMOS) {
+        const hit = window.PRECOMPUTED_DEMOS.results[selectedSample];
+        if (hit) {
+          lastResult = hit;
+          setStep(1);
+          statusMsg.textContent = `Loaded real-data output (${hit.items.length} items). Click Next Step ->`;
+          return;
+        }
       }
       runBtn.disabled = true;
-      statusMsg.textContent = "Running SAM 2 -> Depth Anything V2 -> DKDF 6-stage pipeline on local compute...";
-      statusMsg.className = "status-msg";
-
+      statusMsg.textContent = "Running SAM 2 -> ResNet50 -> Depth Anything V2 -> DKDF on local compute...";
+      statusMsg.className = "status-line";
       try {
-        const payload = {
-          sample_name: selectedSample,
-          image_base64: uploadedBase64,
-          scale_px_per_cm: scaleInput.value ? parseFloat(scaleInput.value) : null,
-          max_items: parseInt(document.getElementById("maxItemsInput").value || "8", 10),
-          min_confidence: parseFloat(document.getElementById("minConfInput").value || "0.20"),
-        };
         const resp = await fetch("/api/predict", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            sample_name: selectedSample,
+            image_base64: uploadedBase64,
+            scale_px_per_cm: scaleInput.value ? parseFloat(scaleInput.value) : null,
+            max_items: 8,
+            min_confidence: 0.50,
+          }),
         });
         const data = await resp.json();
-        if (!resp.ok || data.error) {
-          throw new Error(data.error || "Inference failed");
-        }
-        renderResults(data);
-        statusMsg.textContent = `Completed 6 stages in ${data.total_elapsed_s}s (${data.items.length} food items quantified).`;
+        if (!resp.ok || data.error) throw new Error(data.error || "Inference failed");
+        lastResult = data;
+        statusMsg.textContent = `Completed in ${data.total_elapsed_s}s! Use Next Step -> to inspect each stage.`;
+        setStep(1);
       } catch (err) {
         statusMsg.textContent = "Error: " + err.message;
-        statusMsg.className = "status-msg error-msg";
+        statusMsg.className = "status-line err";
       } finally {
         runBtn.disabled = false;
       }
     };
 
-    function renderResults(data) {
-      const s1 = data.stages.stage1_scale_recovery;
-      const s2 = data.stages.stage2_sam2_segmentation;
-      const s3 = data.stages.stage3_recognition;
-      const s4 = data.stages.stage4_depth_anything_v2;
-      const s6 = data.stages.stage6_nutrition_totals;
+    prevBtn.onclick = () => { stopAuto(); setStep(Math.max(0, activeStep - 1)); };
+    nextBtn.onclick = () => { stopAuto(); setStep(Math.min(6, activeStep + 1)); };
+    autoBtn.onclick = () => {
+      if (autoTimer) { stopAuto(); return; }
+      if (!lastResult) return;
+      if (activeStep >= 6) setStep(0);
+      autoBtn.textContent = "Pause ||";
+      autoTimer = setInterval(() => {
+        if (activeStep >= 6) { stopAuto(); return; }
+        setStep(activeStep + 1);
+      }, 1500);
+    };
 
-      document.getElementById("st1Meta").textContent = `${s1.scale_px_per_cm} px/cm (${s1.scale_source})`;
-      document.getElementById("st2Meta").textContent = `${s2.retained_instances} masks (${s2.elapsed_s}s)`;
-      document.getElementById("st3Meta").textContent = `${s3.detected_items} classified`;
-      document.getElementById("st4Meta").textContent = `${s4.encoder} (${s4.elapsed_s}s)`;
-      document.getElementById("st6Meta").textContent = `${s6.total_mass_g} g | ${s6.total_energy_kcal} kcal`;
+    function stopAuto() {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      autoBtn.innerHTML = "Auto Play &#9654;";
+    }
 
-      document.getElementById("imgRectified").src = data.visual_data_urls.rectified;
-      document.getElementById("imgSeg").src = data.visual_data_urls.segmentation;
-      document.getElementById("imgDepth").src = data.visual_data_urls.depth;
+    function setStep(stepIdx) {
+      activeStep = stepIdx;
+      const meta = STEPS[stepIdx];
+      document.getElementById("stageTitle").textContent = meta.title;
+      document.getElementById("stageDesc").textContent = meta.desc;
 
-      document.getElementById("kpiVol").textContent = `${s6.total_volume_cm3} cm\u00b3`;
-      document.getElementById("kpiMass").textContent = `${s6.total_mass_g} g`;
-      document.getElementById("kpiKcal").textContent = `${s6.total_energy_kcal} kcal`;
-      document.getElementById("kpiTime").textContent = `${data.total_elapsed_s} s`;
+      document.querySelectorAll(".step-node").forEach(btn => {
+        const id = parseInt(btn.dataset.step, 10);
+        btn.classList.toggle("active", id === stepIdx);
+        btn.classList.toggle("done", Boolean(lastResult) && id < stepIdx);
+      });
 
-      const gtBanner = document.getElementById("gtBanner");
-      if (data.ground_truth) {
-        const gt = data.ground_truth;
-        const gtItems = gt.items.map(x => `${x.display_name}: ${x.true_mass_g}g`).join(", ");
-        gtBanner.style.display = "block";
-        gtBanner.innerHTML = `<strong>Electronic-Scale Ground Truth (${gt.filename}):</strong> Total <strong>${gt.total_mass_g} g</strong> (~${gt.total_energy_kcal} kcal) &mdash; Components: ${gtItems}`;
-      } else {
-        gtBanner.style.display = "none";
-      }
+      prevBtn.disabled = !lastResult || stepIdx <= 0;
+      nextBtn.disabled = !lastResult || stepIdx >= 6;
+      autoBtn.disabled = !lastResult;
 
-      const tbody = document.getElementById("itemsBody");
-      if (!data.items || data.items.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--muted);">No food components met the threshold. Try lowering Min Classifier Conf.</td></tr>`;
+      const imgEl = document.getElementById("stageImage");
+      const badgeEl = document.getElementById("canvasBadge");
+      const detailEl = document.getElementById("detailPanel");
+
+      if (!lastResult || stepIdx === 0) {
+        imgEl.src = currentPreviewUrl;
+        badgeEl.textContent = "Input RGB Photo";
+        detailEl.innerHTML = `
+          <h3>Stage 0 · Input Overview</h3>
+          <div class="chip-list">
+            <div class="item-chip">
+              <div class="chip-top">Source Image</div>
+              <div class="chip-sub">${selectedSample || "Custom uploaded meal photo"}</div>
+            </div>
+            <div class="item-chip">
+              <div class="chip-top">Next Action</div>
+              <div class="chip-sub">${lastResult ? "Click <strong>Next Step &rarr;</strong> to view Stage 1 Scale Recovery." : "Click <strong>Run 6-Stage Pipeline &rarr;</strong> on the left."}</div>
+            </div>
+          </div>`;
         return;
       }
-      tbody.innerHTML = data.items.map(it => {
-        const gateCls = it.gate_active ? "badge-on" : "badge-off";
-        const gateTxt = it.gate_active ? `ON (${it.delta_gated >= 0 ? "+" : ""}${it.delta_gated})` : "OFF (0.0)";
-        return `
-          <tr>
-            <td><span class="dot" style="background:${it.color_hex}"></span><strong>#${it.id} ${it.display_name}</strong></td>
-            <td>${(it.confidence * 100).toFixed(1)}% <span class="badge ${gateCls}">${gateTxt}</span></td>
-            <td>${it.area_cm2}</td>
-            <td>${it.v_geo_cm3}</td>
-            <td>${it.v_depth_cm3}</td>
-            <td>q=${it.depth_contrast_q}<br>&alpha;=${it.alpha}</td>
-            <td><strong>${it.v_fused_cm3}</strong></td>
-            <td>${it.density_g_cm3}</td>
-            <td><strong>${it.mass_g}</strong></td>
-            <td><strong>${it.energy_kcal}</strong></td>
-          </tr>
-        `;
-      }).join("");
+
+      const s1 = lastResult.stages.stage1_scale_recovery;
+      const s2 = lastResult.stages.stage2_sam2_segmentation;
+      const s3 = lastResult.stages.stage3_recognition;
+      const s4 = lastResult.stages.stage4_depth_anything_v2;
+      const s6 = lastResult.stages.stage6_nutrition_totals;
+      const v = lastResult.visual_data_urls;
+
+      if (stepIdx === 1) {
+        imgEl.src = v.rectified;
+        badgeEl.textContent = `Stage 1 · Scale = ${s1.scale_px_per_cm} px/cm`;
+        detailEl.innerHTML = `
+          <h3>Stage 1 · Perspective & Metric Scale</h3>
+          <div class="chip-list">
+            <div class="item-chip"><div class="chip-top">Planar Scale (s)<span>${s1.scale_px_per_cm} px/cm</span></div><div class="chip-sub">Source: ${s1.scale_source}</div></div>
+            <div class="item-chip"><div class="chip-top">Working Resolution<span>${lastResult.image_size.work_w} &times; ${lastResult.image_size.work_h}</span></div><div class="chip-sub">Pixel area p_area = s<sup>-2</sup> = ${(1/(s1.scale_px_per_cm**2)).toFixed(5)} cm&sup2;/px</div></div>
+            <div class="item-chip"><div class="chip-top">Stage Runtime<span>${s1.elapsed_s} s</span></div><div class="chip-sub">Homography x' ~ Hx aligns planar pixel units to physical centimeters.</div></div>
+          </div>`;
+      } else if (stepIdx === 2) {
+        imgEl.src = v.sam2_masks || v.segmentation;
+        badgeEl.textContent = `Stage 2 · SAM 2 (${s2.retained_instances} food masks)`;
+        detailEl.innerHTML = `
+          <h3>Stage 2 · SAM 2 Instance Segmentation</h3>
+          <div class="chip-list">
+            <div class="item-chip"><div class="chip-top">CLAHE Luminance Enhancement<span>${s2.clahe_applied ? "Applied" : "Skipped (good contrast)"}</span></div><div class="chip-sub">Triggered when grayscale std &sigma;<sub>I</sub> &lt; 30.0 (clipLimit=3.0).</div></div>
+            <div class="item-chip"><div class="chip-top">SAM 2 Mask Filtering<span>${s2.retained_instances} kept / ${s2.raw_proposals} raw</span></div><div class="chip-sub">Morphological refinement + NMS + plate-region filtering.</div></div>
+            ${lastResult.items.map(it => `<div class="item-chip"><div class="chip-top"><span><span class="dot" style="background:${it.color_hex}"></span>Mask #${it.id}</span><span>${it.area_cm2} cm&sup2;</span></div><div class="chip-sub">${it.area_px.toLocaleString()} pixels</div></div>`).join("")}
+          </div>`;
+      } else if (stepIdx === 3) {
+        imgEl.src = v.segmentation;
+        badgeEl.textContent = `Stage 3 · ResNet50 (${s3.detected_items} classified)`;
+        detailEl.innerHTML = `
+          <h3>Stage 3 · Food Category & Confidence Gate</h3>
+          <div class="chip-list">
+            ${lastResult.items.map(it => `
+              <div class="item-chip">
+                <div class="chip-top">
+                  <span><span class="dot" style="background:${it.color_hex}"></span>#${it.id} ${it.display_name}</span>
+                  <span>${(it.confidence*100).toFixed(1)}% <span class="gate-pill ${it.gate_active ? "gate-on" : "gate-off"}">${it.gate_active ? "GATE ON" : "GATE OFF"}</span></span>
+                </div>
+                <div class="chip-sub">Prior group: ${it.prior_group} (&delta;<sub>c</sub>=${it.delta_c >= 0 ? "+" : ""}${it.delta_c})</div>
+              </div>`).join("")}
+          </div>`;
+      } else if (stepIdx === 4) {
+        imgEl.src = v.depth;
+        badgeEl.textContent = `Stage 4 · Depth Anything V2 (${s4.elapsed_s}s)`;
+        detailEl.innerHTML = `
+          <h3>Stage 4 · Monocular Relative Depth</h3>
+          <div class="chip-list">
+            <div class="item-chip"><div class="chip-top">Depth Backbone<span>${s4.encoder}</span></div><div class="chip-sub">Rim anchor h<sub>ref</sub> = ${s4.rim_height_ref_cm} cm, local background D<sub>bg</sub> sampled outside food margin.</div></div>
+            ${lastResult.items.map(it => `
+              <div class="item-chip">
+                <div class="chip-top"><span><span class="dot" style="background:${it.color_hex}"></span>#${it.id} ${it.display_name}</span><span>V<sub>depth</sub> = ${it.v_depth_cm3} cm&sup3;</span></div>
+                <div class="chip-sub">Depth contrast q = ${it.depth_contrast_q} | Mean rel. height = ${it.mean_height_cm} cm</div>
+              </div>`).join("")}
+          </div>`;
+      } else if (stepIdx === 5) {
+        imgEl.src = v.segmentation;
+        badgeEl.textContent = `Stage 5 · DKDF Adaptive Fusion (\u03bb=5.5)`;
+        detailEl.innerHTML = `
+          <h3>Stage 5 · Dual-Branch DKDF Weighting</h3>
+          <div class="chip-list">
+            ${lastResult.items.map(it => {
+              const gPct = Math.round(it.alpha * 100);
+              const dPct = 100 - gPct;
+              return `
+                <div class="item-chip">
+                  <div class="chip-top"><span><span class="dot" style="background:${it.color_hex}"></span>#${it.id} ${it.display_name}</span><span>V&#770; = ${it.v_fused_cm3} cm&sup3;</span></div>
+                  <div class="chip-sub">V<sub>geo</sub>=${it.v_geo_cm3} cm&sup3; (${gPct}%) &middot; V<sub>depth</sub>=${it.v_depth_cm3} cm&sup3; (${dPct}%) &middot; &alpha;=${it.alpha}</div>
+                  <div class="bar-track"><div class="bar-geo" style="width:${gPct}%"></div><div class="bar-dep" style="width:${dPct}%"></div></div>
+                </div>`;
+            }).join("")}
+          </div>`;
+      } else if (stepIdx === 6) {
+        imgEl.src = v.segmentation;
+        badgeEl.textContent = `Stage 6 · ${s6.total_mass_g} g | ${s6.total_energy_kcal} kcal`;
+        const gtHtml = lastResult.ground_truth
+          ? `<div class="gt-box"><strong>Electronic-Scale Ground Truth:</strong> ${lastResult.ground_truth.total_mass_g} g (~${lastResult.ground_truth.total_energy_kcal} kcal)</div>`
+          : "";
+        detailEl.innerHTML = `
+          <h3>Stage 6 · Mass &amp; USDA SR28 Energy</h3>
+          <div class="kpi-grid">
+            <div class="kpi"><div class="kl">Total Predicted Mass</div><div class="kv">${s6.total_mass_g} g</div></div>
+            <div class="kpi"><div class="kl">Total Est. Energy</div><div class="kv">${s6.total_energy_kcal} kcal</div></div>
+          </div>
+          ${gtHtml}
+          <div style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>Item</th><th>&rho; (g/cm&sup3;)</th><th>Mass (g)</th><th>Energy (kcal)</th></tr></thead>
+              <tbody>
+                ${lastResult.items.map(it => `<tr><td><span class="dot" style="background:${it.color_hex}"></span>#${it.id} ${it.display_name}</td><td>${it.density_g_cm3}</td><td><strong>${it.mass_g}</strong></td><td><strong>${it.energy_kcal}</strong></td></tr>`).join("")}
+              </tbody>
+            </table>
+          </div>`;
+      }
     }
 
     init();

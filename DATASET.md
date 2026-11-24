@@ -43,9 +43,9 @@ Once you receive the password, extract the archive with standard `unzip`, 7-Zip,
 
 ## 3. Ready-to-Run Demo Samples
 
-For immediate testing of the local HTML web demo (`python demo_app.py`) and CLI demo (`python main.py`), a public subset of sample images and ground-truth weights is included directly in:
-- `data/test_images/`
-- `data/ground_truth.csv`
+For immediate testing of the local HTML web demo (`python demo_app.py`) and CLI demo (`python main.py`), only **4 curated sample images** and their ground-truth weights are included outside the encrypted archive:
+- `data/test_images/` (4 curated samples)
+- `data/ground_truth.csv` (11 component rows for the 4 samples)
 
 ---
 

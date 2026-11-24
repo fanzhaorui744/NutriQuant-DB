@@ -245,6 +245,7 @@ class DemoHandler(BaseHTTPRequestHandler):
             vis = res.pop("visuals", {})
             res["visual_data_urls"] = {
                 "rectified": _encode_png_data_url(vis["rectified_bgr"]) if "rectified_bgr" in vis else "",
+                "sam2_masks": _encode_png_data_url(vis["sam2_masks_bgr"]) if "sam2_masks_bgr" in vis else "",
                 "segmentation": _encode_png_data_url(vis["segmentation_bgr"]) if "segmentation_bgr" in vis else "",
                 "depth": _encode_png_data_url(vis["depth_bgr"]) if "depth_bgr" in vis else "",
             }

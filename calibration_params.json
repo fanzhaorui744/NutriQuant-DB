@@ -1,1693 +1,206 @@
 {
-    "xihongshi": {
-        "depth_scale_factor": 0.5156156420707703,
-        "mean_area_density": 0.3625417649745941,
-        "std_area_density": 0.29210925102233887,
-        "count": 18,
-        "weight_p05": 1.429,
-        "weight_p95": 10.17,
-        "regression": {
-            "a": -0.44022434401455307,
-            "b": 1.775132623716371,
-            "c": -0.1894944142093603,
-            "n": 20,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.09635890103881448,
-                0.1351951709599434,
-                0.3729092311443929,
-                -16.079753273626746,
-                -0.3227672487642866,
-                8.432462530127157
-            ],
-            "n": 20,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -1.0772297480325672,
-                0.28655233070876185,
-                0.7903981241920964,
-                4.671904708017503,
-                -0.4108635170965761,
-                -24.446665211354265,
-                -5.188912118572814,
-                -31.439837586855614,
-                55.51481194221746
-            ],
-            "n": 20,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -0.43808564864627497,
-                0.16031024515693823,
-                0.4421842075249279,
-                -2.0596072142138095,
-                -0.24646333164098563,
-                33.48102572752727,
-                3.6134262632429035,
-                -70.70434406782645,
-                -38.67531399105625,
-                -1.4454539524699341,
-                4.134374845111434,
-                30.741064800362008,
-                30.74106479954378
-            ],
-            "n": 20,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -0.0013838849936769425,
-                0.08858125301998394,
-                0.09183638585152508,
-                -0.5315945198699811,
-                -0.11940165172953811,
-                32.46102545585766,
-                1.9279967087690604,
-                -86.69685120686249,
-                -12.014031667442824,
-                1.3387165326322437,
-                0.8703867320457841,
-                1.6083572985149888e-30,
-                65.41530637639984
-            ],
-            "n": 20,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/xihongshi.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 20
-        }
-    },
-    "qingcai": {
-        "depth_scale_factor": 0.09362629055976868,
-        "mean_area_density": 0.11737313866615295,
-        "std_area_density": 0.05602152645587921,
-        "count": 38,
-        "weight_p05": 1.82,
-        "weight_p95": 6.74,
-        "regression": {
-            "a": 0.09271804280652537,
-            "b": 0.21766585351593348,
-            "c": 2.324622891618649,
-            "n": 44,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.35420096188807143,
-                -0.004783646963968312,
-                -0.04075589198650614,
-                0.21953973257995366,
-                0.5972576342993553,
-                1.5370305008249832
-            ],
-            "n": 44,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                0.01716116926757077,
-                0.0029109106633873555,
-                0.02480048430864552,
-                15.824946354249514,
-                -0.20310178974027016,
-                -3.3818180738291987,
-                -0.9797248959133971,
-                1.7512586512149495,
-                4.293879413131625
-            ],
-            "n": 44,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                0.6620378523765243,
-                -0.022860037294535205,
-                -0.19476378894784335,
-                -4.370605155300946,
-                0.25949823098068964,
-                -7.581742959810399,
-                0.033332933501450925,
-                9.575380265048025,
-                -13.126813238353899,
-                -0.20867263444928216,
-                2.574661781257459,
-                -0.7822624395800691,
-                -0.7822624395798412
-            ],
-            "n": 44,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -0.4845656163630033,
-                -1.5761813398263393,
-                -1.5736031986429877,
-                0.9576018635913945,
-                -0.07765820940227683,
-                -0.8291339849821002,
-                -0.5879854136246466,
-                4.846395180400622,
-                -0.6221080197856135,
-                3.660044814053527,
-                4.189751585324624,
-                4.736650403563751e-31,
-                -6.127735462720592
-            ],
-            "n": 44,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/qingcai.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 44
-        }
-    },
-    "egg": {
-        "depth_scale_factor": 0.6560755968093872,
-        "mean_area_density": 0.6103727221488953,
-        "std_area_density": 0.25169071555137634,
-        "count": 19,
-        "weight_p05": 0.883,
-        "weight_p95": 9.23,
-        "regression": {
-            "a": -0.760952414091534,
-            "b": 0.8689372155447898,
-            "c": 7.20555830073428,
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                -0.7193451505324518,
-                0.22060229978077714,
-                0.3614222787561416,
-                11.930884767925182,
-                -1.272505747220262,
-                3.9511818056956582
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -0.2496642780097986,
-                0.08875256726249749,
-                0.14540716327353786,
-                17.794813593446086,
-                -1.6186300351803249,
-                -8.41207255414148,
-                -13.82230580170623,
-                1.957256520099867,
-                27.575803020125843
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -0.0837160110844663,
-                -0.10219164394340051,
-                -0.16742498576038456,
-                9.837428810726482,
-                -1.5924790105309763,
-                -5.918015239498854,
-                -26.77010202212417,
-                15.972051841555698,
-                -4.567076124898155,
-                5.372257094892413,
-                -6.500216559263561,
-                19.659348401154812,
-                19.659348401610465
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -1.4588335209815542,
-                -2.470742493182197,
-                -2.4693530036882025,
-                4.7072754434922635,
-                -0.7836000207100344,
-                -3.3879523043264475,
-                -4.901075535969341,
-                21.66306859894388,
-                -10.398219564586952,
-                6.1161150901488766,
-                6.853178277695943,
-                9.140962108780921e-31,
-                -5.7824516350667885
-            ],
-            "n": 21,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/egg.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 21
-        }
-    },
-    "tudousi": {
-        "depth_scale_factor": 0.7379345297813416,
-        "mean_area_density": 0.24116365611553192,
-        "std_area_density": 0.08037075400352478,
-        "count": 11,
-        "weight_p05": 0.73,
-        "weight_p95": 1.62,
-        "regression": {
-            "a": 0.4360298248580041,
-            "b": -0.18269671634272358,
-            "c": 1.087201155585586,
-            "n": 11,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.5759948457631979,
-                -0.028357691071088802,
-                -0.11758691826303808,
-                -0.13286385142354581,
-                -0.4506026677636542,
-                2.549102005014974
-            ],
-            "n": 11,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                0.4022617347239313,
-                -0.030443476901257815,
-                -0.12623575803731002,
-                -1.245999354661305,
-                -0.2654950889125771,
-                7.694760713998098,
-                0.4159648635440811,
-                -0.595448825242106,
-                -1.5542435886069519
-            ],
-            "n": 11,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                0.37089989350960434,
-                -0.06739781842635545,
-                -0.2794692186352155,
-                -0.8208909454168544,
-                -0.24653754123867125,
-                6.162742601407977,
-                0.13370935378727747,
-                0.9528963240667585,
-                0.33172445634106,
-                0.38547158325376624,
-                -0.23515209625742306,
-                -1.234320742265647,
-                -1.2343207422332745
-            ],
-            "n": 11,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -0.12050400340575868,
-                -1.0376155940574718,
-                -1.0285664946398625,
-                0.37479716911825967,
-                -0.1745764725208255,
-                15.16094830013371,
-                4.147480173861724,
-                -0.944283232042453,
-                -0.2664283323936813,
-                2.295053638345305,
-                1.8310583706390708,
-                -2.024468446514189e-31,
-                -12.205331992368942
-            ],
-            "n": 11,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/tudousi.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 11
-        }
-    },
-    "lajiao": {
-        "depth_scale_factor": 0.16065505146980286,
-        "mean_area_density": 0.14416702091693878,
-        "std_area_density": 7.423999786376953,
-        "count": 14,
-        "weight_p05": 0.47,
-        "weight_p95": 4.12,
-        "regression": {
-            "a": 1.0845662704318952,
-            "b": -0.7204077901788598,
-            "c": 1.7557610532334875,
-            "n": 14,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                2.4619950393977987,
-                -0.04031916699939239,
-                -0.27966983496276887,
-                -15.180937450176415,
-                0.5491157310797915,
-                1.4141488074002608
-            ],
-            "n": 14,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                1.744911945756782,
-                -0.02851214869320916,
-                -0.19777164408812914,
-                -16.43623467785474,
-                0.376419766943446,
-                -5.247000898965305,
-                -0.9021937649445154,
-                -1.1561279592134894,
-                7.685871689669607
-            ],
-            "n": 14,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -2.532304566795612,
-                0.13033579845350915,
-                0.9040611149373217,
-                -6.3889474749379564,
-                0.09169985753933865,
-                -1.739655546547301,
-                7.246818157357437,
-                -19.717983840645072,
-                7.07655350964696,
-                -4.479689700881783,
-                5.003391144421577,
-                1.9539238653448803,
-                3.3580720592169135
-            ],
-            "n": 14,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                2.4040448812615405,
-                2.7458310598923754,
-                2.253422361528274,
-                -2.1455768649253346,
-                0.4601344387021419,
-                -18.129299483090573,
-                -3.302230943351107,
-                4.90245136806598,
-                -0.37889276204739275,
-                -8.139153493204113,
-                -6.924506964561126,
-                0.2640702761301038,
-                15.271938835259991
-            ],
-            "n": 14,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/lajiao.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 14
-        }
-    },
-    "jirou": {
-        "depth_scale_factor": 0.3075993061065674,
-        "mean_area_density": 0.3275578022003174,
-        "std_area_density": 0.3041130602359772,
-        "count": 19,
-        "weight_p05": 2.0,
-        "weight_p95": 7.69,
-        "regression": {
-            "a": -0.03395610125317826,
-            "b": 0.03310203246899711,
-            "c": 2.0646115652165187,
-            "n": 13,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.0030921028012552056,
-                0.0002695362265580324,
-                0.0008228661195704482,
-                -0.06280836027876822,
-                -0.047077613976637726,
-                2.252510471198118
-            ],
-            "n": 13,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                0.0018483854181539526,
-                -0.00014534559824057566,
-                -0.00044372486765040193,
-                0.16771384274359583,
-                -0.01904466914378032,
-                -0.5352951669991154,
-                -0.030646812265402442,
-                0.4055266729404055,
-                2.1290126894857533
-            ],
-            "n": 13,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                0.057876471335274134,
-                -0.012390301718028362,
-                -0.037826306091957085,
-                -0.09951700968296816,
-                -0.01948585656803836,
-                -0.5723142333166257,
-                -0.05813724705493835,
-                0.3697956267079679,
-                0.46075265831404266,
-                0.07358122377114636,
-                -0.00013382873097509464,
-                0.9563966003361277,
-                0.9563966003099144
-            ],
-            "n": 13,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -0.034915476670841786,
-                -0.07225789994816842,
-                -0.07226673603021234,
-                0.05795868256872595,
-                -0.015682726587461702,
-                -0.2428987966998863,
-                0.04687593993580412,
-                0.5674392226671744,
-                0.1039902232963815,
-                0.15994761745980532,
-                0.20393147448610113,
-                6.31383919164907e-32,
-                0.2461865812926774
-            ],
-            "n": 13,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/jirou.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 13
-        }
-    },
-    "qiezi": {
-        "depth_scale_factor": 0.24850833415985107,
-        "mean_area_density": 0.36855214834213257,
-        "std_area_density": 0.34060731530189514,
-        "count": 19,
-        "weight_p05": 4.62,
-        "weight_p95": 15.2,
-        "regression": {
-            "a": 0.4676360197831183,
-            "b": -0.16751458788032317,
-            "c": 6.706959256894047,
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.22844337136990123,
-                0.006645793145162432,
-                0.01803216470109658,
-                8.831011543333148,
-                0.3024176386196951,
-                2.3968462620777657
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                0.07029174940717627,
-                0.016150377903490373,
-                0.043821147100066356,
-                17.78394061607125,
-                0.1294732587690101,
-                -17.12846643357345,
-                -0.3395192180558994,
-                18.7424559037841,
-                -7.441090645099098
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -0.6936016835500655,
-                -0.23130225269884444,
-                -0.6275970821442286,
-                12.768421416855904,
-                1.3855477725486989,
-                -3.3348056559048262,
-                4.981028437712697,
-                41.635207842516465,
-                15.960252329165048,
-                -0.6127089560280901,
-                10.455196408539551,
-                -36.222051385865356,
-                -36.22205138580513
-            ],
-            "n": 21,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                1.14168666629391,
-                1.549663493609662,
-                1.5492869658269832,
-                -0.42569182542606154,
-                0.05263034381604128,
-                -5.6989282594429,
-                0.10472001594226431,
-                5.3037131103270765,
-                -0.36395424914407454,
-                -6.041622318351325,
-                -2.6407638619844276,
-                -1.4522332947983137e-30,
-                5.678667357275955
-            ],
-            "n": 21,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/qiezi.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 21
-        }
-    },
-    "tudou": {
-        "depth_scale_factor": 0.09043490886688232,
-        "mean_area_density": 0.10516437888145447,
-        "std_area_density": 0.07069511711597443,
-        "count": 33,
-        "weight_p05": 2.43,
-        "weight_p95": 10.88,
-        "regression": {
-            "a": 0.8301716677285558,
-            "b": -0.5854035066889153,
-            "c": 3.9446909990675447,
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.7453080142796974,
-                -0.005723890685598417,
-                -0.054428036737456074,
-                7.665266537616889,
-                0.07532671727271553,
-                3.093680292737077
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                0.3782621408896812,
-                -0.0008482243983941062,
-                -0.008065700140671143,
-                10.208312635068769,
-                0.38177139549980743,
-                -6.155088792598412,
-                3.041167912076055,
-                -1.7038579943953873,
-                3.0412040940344967
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                0.5125913416061713,
-                -0.024952297559206756,
-                -0.23726947832376363,
-                -0.4912122648275264,
-                0.1638971959996724,
-                -1.0378455957248653,
-                1.0060464664962243,
-                -6.248507729046588,
-                0.7874076708103739,
-                1.6015336670191562,
-                1.0376298642933017,
-                -1.4492317963722372,
-                -1.4492317964065673
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                0.016717604135127278,
-                -0.25982726968074255,
-                -0.25405302407199326,
-                0.6336973757830423,
-                0.043553348259384284,
-                0.3666551525160031,
-                0.5062207313107456,
-                -2.1840999454247862,
-                -0.7512398045470029,
-                0.8215847454993299,
-                0.7562908255895333,
-                1.3283597135651107e-31,
-                3.260998367233202
-            ],
-            "n": 28,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/tudou.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 28
-        }
-    },
-    "tofu": {
-        "depth_scale_factor": 0.4328308701515198,
-        "mean_area_density": 0.550230860710144,
-        "std_area_density": 0.2563895285129547,
-        "count": 17,
-        "weight_p05": 5.832000000000001,
-        "weight_p95": 10.47,
-        "regression": {
-            "a": 0.48957504836248594,
-            "b": -0.5973246768616987,
-            "c": 8.472335215833128,
-            "n": 17,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.13327028296681323,
-                -0.04697008231702032,
-                -0.08536431795530629,
-                11.398826403225605,
-                -1.099558600919801,
-                6.7493449613051775
-            ],
-            "n": 17,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -0.11868393373478203,
-                0.01959600517581378,
-                0.035614151252402734,
-                5.928209326114124,
-                -0.7082039162353901,
-                -9.821385078192252,
-                0.27977625533553835,
-                1.8132357899627072,
-                11.714608853598484
-            ],
-            "n": 17,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                0.05418250428055544,
-                -0.0035360965869217745,
-                -0.006426568996687664,
-                5.126183513168692,
-                -0.8280511056631938,
-                -4.689920479644225,
-                7.618511530381774,
-                0.7363362322925807,
-                -14.550126284292434,
-                -1.6204412610544714,
-                2.545206023354937,
-                3.7245130724319004,
-                3.724513072311726
-            ],
-            "n": 17,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -0.006406280200962868,
-                -0.12944820823533673,
-                -0.12884842718280287,
-                0.5854934376013897,
-                -0.06117309939312287,
-                0.03542346028993762,
-                0.36689351720528884,
-                -1.8546478663350159,
-                -4.062774810436614,
-                0.2756858633570207,
-                0.2255833410598954,
-                4.971003463022076e-32,
-                6.564214836792194
-            ],
-            "n": 17,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/tofu.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 17
-        }
-    },
-    "rice": {
-        "depth_scale_factor": 0.37822219729423523,
-        "mean_area_density": 0.36940693855285645,
-        "std_area_density": 0.22315941751003265,
-        "count": 24,
-        "weight_p05": 2.66,
-        "weight_p95": 12.38,
-        "regression": {
-            "a": -0.49491919304196963,
-            "b": 1.2482458358225073,
-            "c": 2.3599644545803216,
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                0.2180889337051141,
-                0.07729526496375651,
-                0.20924150872999447,
-                -1.9625585655128412,
-                -1.0071322577334305,
-                6.321989079993843
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -0.6433032849854491,
-                0.11140289493623406,
-                0.3015722826147744,
-                13.961466994034954,
-                -1.1950340950565537,
-                -64.53480804074279,
-                0.019140092130111374,
-                77.2913770917918,
-                -33.62012000289403
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -0.9646993815884881,
-                0.2551428129235595,
-                0.6906822443019128,
-                19.377768099624152,
-                -1.0958748124826119,
-                -66.30451754474988,
-                -6.613064850206496,
-                69.38546325773349,
-                12.84729185930225,
-                0.640833274041145,
-                -3.133096144079254,
-                -12.25060777737939,
-                -12.250607777561694
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                -1.7922896360223233,
-                -2.377627122305576,
-                -2.3786878459758123,
-                2.0442694978214098,
-                -0.13945738422122667,
-                -9.859318805951252,
-                -0.1293873153159313,
-                14.936620148900175,
-                3.7323929402170894,
-                6.089817413042144,
-                7.172635587925873,
-                6.888570425160912e-32,
-                -13.3264380070571
-            ],
-            "n": 28,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/rice.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 28
-        }
-    },
-    "xilanhua": {
-        "depth_scale_factor": 0.17659473419189453,
-        "mean_area_density": 0.2607366740703583,
-        "std_area_density": 0.18503250181674957,
-        "count": 31,
-        "weight_p05": 6.691,
-        "weight_p95": 10.8,
-        "regression": {
-            "a": 0.009008311938805195,
-            "b": 0.008397805611783687,
-            "c": 9.761019472926195,
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                -0.018440379587737,
-                0.002204680935448985,
-                0.008455583967181353,
-                0.14928488522143707,
-                0.09668192192691878,
-                9.375482939742316
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -0.17289212111605384,
-                0.011655957621380891,
-                0.044703943384414725,
-                -0.015958993514698518,
-                0.14369153551919905,
-                4.856683242035628,
-                0.2783177172455162,
-                3.0470325969902716,
-                4.525926800898458
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        },
-        "regression_v4": {
-            "coef": [
-                -0.17086272184039233,
-                0.020688578924659966,
-                0.07934663796167382,
-                0.16035798826801426,
-                0.1292202958106371,
-                3.200471095001525,
-                -2.7669486821918667,
-                0.1955970520885414,
-                3.7681320414345394,
-                0.2629089522435701,
-                -0.7990327948119907,
-                5.676864107663894,
-                5.676864107665025
-            ],
-            "n": 28,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count",
-                "bias"
-            ]
-        },
-        "regression_v5": {
-            "coef": [
-                0.11036051341193757,
-                0.4776612835068271,
-                0.47773695171376696,
-                -0.16857064177933234,
-                0.00018110726520146697,
-                -0.012430229325055688,
-                0.06829756376432054,
-                -1.4851106104143585,
-                0.922045361792857,
-                -1.262171793524329,
-                -0.9459892916206311,
-                -6.199285961189342e-32,
-                4.345403364916333
-            ],
-            "n": 28,
-            "features": [
-                "log_weight_depth_g",
-                "log_weight_prior_g",
-                "log_area_cm2",
-                "log_height_cm",
-                "depth_contrast",
-                "circularity",
-                "log_aspect_ratio",
-                "solidity",
-                "extent",
-                "log_bbox_long_cm",
-                "log_bbox_short_cm",
-                "log_component_count",
-                "bias"
-            ],
-            "is_log": true
-        },
-        "regression_rf": {
-            "model_path": "models/rf_regressors/xilanhua.pkl",
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "extent",
-                "bbox_long_cm",
-                "bbox_short_cm",
-                "component_count"
-            ],
-            "n": 28
-        }
-    },
-    "default": {
-        "depth_scale_factor": 0.26558631658554077,
-        "mean_area_density": 0.26091957092285156,
-        "std_area_density": 0.24258948862552643,
-        "count": 245,
-        "weight_p05": 1.462,
-        "weight_p95": 12.38,
-        "regression": {
-            "a": -0.19914772250247434,
-            "b": 0.7203051903567029,
-            "c": 3.147396994672869,
-            "n": 273,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "bias"
-            ]
-        },
-        "regression_v2": {
-            "coef": [
-                -0.3182605083299465,
-                0.7341957072075034,
-                0.024823266955303347,
-                4.2997440718018165,
-                -0.2647848142595613,
-                2.810815013710494
-            ],
-            "n": 273,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "bias"
-            ]
-        },
-        "regression_v3": {
-            "coef": [
-                -0.26388130495704293,
-                0.5380906611770488,
-                0.03449258063685441,
-                5.620221077517409,
-                -0.2960115887761091,
-                -11.766761046039369,
-                -0.8574308910953499,
-                12.268388084986277,
-                0.15428744050693038
-            ],
-            "n": 273,
-            "features": [
-                "weight_depth_g",
-                "weight_prior_g",
-                "area_cm2",
-                "height_cm",
-                "depth_contrast",
-                "circularity",
-                "aspect_ratio",
-                "solidity",
-                "bias"
-            ]
-        }
+  "egg": {
+    "depth_scale_factor": 0.6560755968093872,
+    "mean_area_density": 0.6103727221488953,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
     }
+  },
+  "jirou": {
+    "depth_scale_factor": 0.3075993061065674,
+    "mean_area_density": 0.3275578022003174,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "lajiao": {
+    "depth_scale_factor": 0.16065505146980286,
+    "mean_area_density": 0.14416702091693878,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "qiezi": {
+    "depth_scale_factor": 0.24850833415985107,
+    "mean_area_density": 0.36855214834213257,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "qingcai": {
+    "depth_scale_factor": 0.09362629055976868,
+    "mean_area_density": 0.11737313866615295,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "rice": {
+    "depth_scale_factor": 0.37822219729423523,
+    "mean_area_density": 0.36940693855285645,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "tofu": {
+    "depth_scale_factor": 0.4328308701515198,
+    "mean_area_density": 0.550230860710144,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "tudou": {
+    "depth_scale_factor": 0.09043490886688232,
+    "mean_area_density": 0.10516437888145447,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "tudousi": {
+    "depth_scale_factor": 0.7379345297813416,
+    "mean_area_density": 0.24116365611553192,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "xilanhua": {
+    "depth_scale_factor": 0.17659473419189453,
+    "mean_area_density": 0.2607366740703583,
+    "regression_rf": {
+      "features": [
+        "weight_depth_g",
+        "weight_prior_g",
+        "area_cm2",
+        "height_cm",
+        "depth_contrast",
+        "circularity",
+        "aspect_ratio",
+        "solidity",
+        "extent",
+        "bbox_long_cm",
+        "bbox_short_cm",
+        "component_count"
+      ]
+    }
+  },
+  "default": {
+    "depth_scale_factor": 0.26558631658554077,
+    "mean_area_density": 0.26091957092285156
+  }
 }

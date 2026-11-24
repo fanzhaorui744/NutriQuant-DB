@@ -366,6 +366,7 @@ class NutriQuantPipeline:
         # ------------------------------------------------------------------
         t356 = time.perf_counter()
         items = []
+        masks_only_overlay = warped.copy()
         seg_overlay = warped.copy()
         def_cal = self.calibration_params.get("default", {})
 
@@ -486,14 +487,24 @@ class NutriQuantPipeline:
                 "color_hex": "#{:02x}{:02x}{:02x}".format(color[2], color[1], color[0]),
             })
 
+            # Draw mask-only overlay (Stage 2) and labeled overlay (Stage 3)
             if return_visuals:
                 colored = np.zeros_like(seg_overlay, dtype=np.uint8)
                 colored[mask] = color
+                masks_only_overlay = cv2.addWeighted(masks_only_overlay, 1.0, colored, 0.42, 0)
                 seg_overlay = cv2.addWeighted(seg_overlay, 1.0, colored, 0.38, 0)
                 contours, _ = cv2.findContours(mask.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                cv2.drawContours(masks_only_overlay, contours, -1, color, 2)
                 cv2.drawContours(seg_overlay, contours, -1, color, 2)
                 cx = int(xs.mean())
                 cy = int(ys.mean())
+                mask_tag = f"Mask #{item_id}"
+                (mw, mh), _ = cv2.getTextSize(mask_tag, cv2.FONT_HERSHEY_SIMPLEX, 0.50, 2)
+                mlx = max(4, min(masks_only_overlay.shape[1] - mw - 10, cx - mw // 2))
+                mly = max(mh + 10, min(masks_only_overlay.shape[0] - 6, cy))
+                cv2.rectangle(masks_only_overlay, (mlx - 4, mly - mh - 6), (mlx + mw + 4, mly + 4), color, -1)
+                cv2.putText(masks_only_overlay, mask_tag, (mlx, mly), cv2.FONT_HERSHEY_SIMPLEX, 0.50, (255, 255, 255), 2, cv2.LINE_AA)
+
                 label_txt = f"#{item_id} {nutri['display_name']} ({conf*100:.0f}%)"
                 (tw, th), _ = cv2.getTextSize(label_txt, cv2.FONT_HERSHEY_SIMPLEX, 0.52, 2)
                 lx = max(4, min(seg_overlay.shape[1] - tw - 10, cx - tw // 2))
@@ -554,6 +565,7 @@ class NutriQuantPipeline:
             depth_color = _colorize_depth(depth_map)
             result["visuals"] = {
                 "rectified_bgr": warped,
+                "sam2_masks_bgr": masks_only_overlay,
                 "segmentation_bgr": seg_overlay,
                 "depth_bgr": depth_color,
             }
