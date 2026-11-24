@@ -1,5 +1,8 @@
 # NutriQuant & NutriQuant-DB
 
+[![Live Interactive Demo](https://img.shields.io/badge/%E2%96%B6%20Launch%20Live%20Interactive%20Demo-Click%20Here-2563eb?style=for-the-badge)](https://fanzhaorui744.github.io/NutriQuant-DB/)
+[![Dataset Access](https://img.shields.io/badge/NutriQuant--DB-Google%20Drive%20(Restricted)-10b981?style=for-the-badge)](https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing)
+
 Official implementation and interactive step-by-step demo for **NutriQuant**:
 
 > **Single-Image Smartphone Quantification of Canteen Meal Portions and Estimated Energy Intake**
@@ -17,18 +20,18 @@ RGB Photo ──▶ [1] Perspective & Scale (px/cm)
 
 ---
 
-## Interactive 6-Stage Demo Preview (Real NutriQuant-DB Data)
+## Live Interactive 6-Stage Demo (Click to Try)
+
+- **Online Clickable Web Demo (no installation required):** Open **[https://fanzhaorui744.github.io/NutriQuant-DB/](https://fanzhaorui744.github.io/NutriQuant-DB/)** to step interactively (`Next Step ->` / `Auto Play`) through all 6 stages on real NutriQuant-DB cafeteria samples.
+- **Upload Your Own Photos Locally:** Run `python demo_app.py` on your own machine (see Steps 1–3 below).
 
 ![NutriQuant Interactive 6-Stage Step-by-Step Walkthrough](assets/demo_walkthrough.gif)
-
-- **Self-contained Interactive HTML Preview (no Python needed):** open [`docs/index.html`](docs/index.html) locally in your browser (or enable GitHub Pages on `/docs`) to click **`Next Step ->`** through all 6 stages on real NutriQuant-DB samples.
-- **Full Local Live Inference (upload your own photos):** run `python demo_app.py` on your own machine (see Steps 1–3 below).
 
 ---
 
 ## Important Note on Compute Resources
 
-We **do not host a remote GPU inference server**. To run live inference on your own photos (`demo_app.py` or `main.py`), please set up Python and PyTorch on **your own local compute**:
+We **do not host a remote GPU inference server**. To run live inference on your own uploaded photos (`demo_app.py` or `main.py`), please set up Python and PyTorch on **your own local compute**:
 
 - **Recommended:** NVIDIA GPU with CUDA (6 GB+ VRAM; runs all 6 stages in ~3–5 s per image).
 - **Fallback:** CPU-only execution also works out of the box (slower, ~20–45 s per image).
@@ -39,7 +42,7 @@ We **do not host a remote GPU inference server**. To run live inference on your 
 
 ### 1.1 Clone with Git LFS
 
-Model checkpoints and the password-protected full dataset archive are tracked via **Git LFS**. Install Git LFS once before cloning:
+Model checkpoints are tracked via **Git LFS**. Install Git LFS once before cloning:
 
 ```bash
 git lfs install
@@ -134,17 +137,20 @@ python main.py
 
 ---
 
-## Full Image Dataset Access (Password-Protected Archive)
+## Full Image Dataset Access (Restricted Google Drive + Password-Protected ZIP)
 
-The complete **NutriQuant-DB** image dataset (**786 cafeteria images**, **2,094 annotated instances** across **10 cooked-food categories**, CVAT XML & CSV annotations) is stored as an encrypted ZIP archive in this repository:
+The complete **NutriQuant-DB** image dataset (**786 cafeteria images**, **2,094 annotated instances** across **10 cooked-food categories**, CVAT XML & CSV annotations, **256.37 MB**) is hosted on Google Drive with **Restricted access** and **password encryption**:
 
-- Archive: [`dataset/NutriQuant-DB_images_protected.zip`](dataset/NutriQuant-DB_images_protected.zip)
-- SHA-256: [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
-- Dataset card: [`DATASET.md`](DATASET.md)
+- **Google Drive (Restricted Access):** [`NutriQuant-DB_images_protected.zip`](https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing)
+- **SHA-256 Checksum:** [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
+- **Dataset Card & Format Spec:** [`DATASET.md`](DATASET.md)
 
-All 791 files inside the archive are password-encrypted (you can download the `.zip` container from GitHub, but extracting or opening any image/annotation requires the decryption password). **For academic research access, please contact the authors (`fanzhaorui744@gmail.com` or the corresponding author listed in the manuscript) with your name, institution, and research purpose to request the password.**
+### How to Request Access & Decryption Password
+1. Click the Google Drive link above and submit a **Request access** request (or email `fanzhaorui744@gmail.com` / the corresponding author in the manuscript) stating your **name, institution, and academic research purpose**.
+2. Once approved, download `NutriQuant-DB_images_protected.zip` and verify its SHA-256 checksum against `dataset/NutriQuant-DB_images_protected.zip.sha256`.
+3. Use the decryption password provided upon approval to extract the archive.
 
-*(Only 4 curated demo sample images are kept outside the encrypted archive in `data/test_images/` so the interactive demo runs out of the box.)*
+*(4 curated demo sample images are included in `data/test_images/` so the interactive demo works immediately after cloning.)*
 
 ---
 
@@ -154,7 +160,7 @@ All 791 files inside the archive are password-encrypted (you can download the `.
 .
 |- demo_app.py                     # Local HTTP backend for the interactive HTML demo
 |- web/index.html                  # Dynamic step-by-step 6-stage HTML UI
-|- docs/index.html                 # Self-contained static interactive demo (preloaded real samples)
+|- docs/index.html                 # GitHub Pages live interactive demo (preloaded real samples)
 |- pipeline_demo.py                # Unified 6-stage NutriQuant + DKDF inference engine
 |- main.py                         # Minimal CLI demo script
 |- download_models.py              # SAM 2 & Depth Anything V2 checkpoint downloader
@@ -170,7 +176,7 @@ All 791 files inside the archive are password-encrypted (you can download the `.
 |- result/                         # Fine-tuned 10-class ResNet50 weights & class list
 |- data/test_images/               # 4 curated real cafeteria samples for demo
 |- data/ground_truth.csv           # Electronic-scale ground truth for the 4 demo samples
-|- dataset/                        # Password-protected full 786-image archive (Git LFS)
+|- dataset/                        # Dataset access link & SHA-256 checksum
 |- assets/demo_walkthrough.gif     # Animated 6-stage walkthrough preview
 |- vendor/                         # Bundled SAM 2 & Depth Anything V2 source modules
 `- requirements_demo.txt           # Python package dependencies

@@ -10,12 +10,12 @@
 
 ---
 
-## 2. Password-Protected Full Release
+## 2. Restricted & Password-Protected Full Release (Google Drive)
 
-The complete dataset is packaged in this repository as an encrypted archive (tracked via Git LFS):
+To keep the GitHub repository lightweight and enforce academic access control, the complete dataset archive (**256.37 MB**) is hosted on Google Drive with **Restricted** sharing permissions and **ZIP password encryption**:
 
-- **Archive:** [`dataset/NutriQuant-DB_images_protected.zip`](dataset/NutriQuant-DB_images_protected.zip)
-- **Checksum:** [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
+- **Google Drive Link (Restricted):** [https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing](https://drive.google.com/file/d/1uRg9CPDsKoWgD67H2SViRSOsQahn2OAR/view?usp=sharing)
+- **SHA-256 Checksum:** [`dataset/NutriQuant-DB_images_protected.zip.sha256`](dataset/NutriQuant-DB_images_protected.zip.sha256)
 
 ### Archive Contents
 
@@ -30,20 +30,16 @@ NutriQuant-DB/
 `- README_DATASET.txt
 ```
 
-### How to Request the Decryption Password
+### How to Request Access & Decryption Password
 
-To comply with institutional data-governance and privacy policies, the full image archive is password-protected. Researchers requesting access for non-commercial academic use should contact:
-
-- **Email:** `fanzhaorui744@gmail.com` (or the corresponding author listed in the manuscript)
-- Please include your **full name, institutional affiliation, and intended research use**.
-
-Once you receive the password, extract the archive with standard `unzip`, 7-Zip, or Python `zipfile`.
+1. Click the Google Drive link above and submit a **Request access** form, or email **`fanzhaorui744@gmail.com`** (or the corresponding author listed in the manuscript) with your **full name, institutional affiliation, and intended research use**.
+2. Upon approval, Google Drive access will be granted and the extraction password will be sent to you.
 
 ---
 
 ## 3. Ready-to-Run Demo Samples
 
-For immediate testing of the local HTML web demo (`python demo_app.py`) and CLI demo (`python main.py`), only **4 curated sample images** and their ground-truth weights are included outside the encrypted archive:
+For immediate testing of the live interactive demo (`https://fanzhaorui744.github.io/NutriQuant-DB/`), local HTML web demo (`python demo_app.py`), and CLI demo (`python main.py`), **4 curated sample images** and their ground-truth weights are included directly in:
 - `data/test_images/` (4 curated samples)
 - `data/ground_truth.csv` (11 component rows for the 4 samples)
 
