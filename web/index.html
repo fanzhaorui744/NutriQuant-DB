@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriQuant — 6-Stage Monocular Food Portion & Energy Demo</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --border: #dfe5ef;
+      --text: #162033;
+      --muted: #5a677d;
+      --accent: #1d6feb;
+      --accent-soft: #ebf3ff;
+      --green: #188038;
+      --green-soft: #e8f5e9;
+      --amber: #b06000;
+      --amber-soft: #fef3e0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px 48px; }
+    header {
+      background: linear-gradient(135deg, #132542 0%, #1d4ed8 100%);
+      color: #fff;
+      padding: 26px 28px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(19, 37, 66, 0.14);
+    }
+    header h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; }
+    header p { margin: 0; opacity: 0.92; font-size: 14px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 380px 1fr; gap: 20px; align-items: start; }
+    @media (max-width: 960px) { .grid-2 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+      margin-bottom: 18px;
+    }
+    .card h2 { margin: 0 0 12px; font-size: 16px; font-weight: 700; }
+    .drop-zone {
+      border: 2px dashed #b9c7dc;
+      border-radius: 10px;
+      padding: 22px 14px;
+      text-align: center;
+      cursor: pointer;
+      background: #fafcff;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .drop-zone:hover, .drop-zone.drag { border-color: var(--accent); background: var(--accent-soft); }
+    .drop-zone input { display: none; }
+    .field { margin-top: 12px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .field input, .field select {
+      width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 13px; background: #fff;
+    }
+    .btn {
+      width: 100%; margin-top: 14px; padding: 11px 16px; border: none; border-radius: 9px;
+      background: var(--accent); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .samples-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;
+      max-height: 240px; overflow-y: auto;
+    }
+    .sample-thumb {
+      border: 2px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer;
+      background: #fff; padding: 0; text-align: left;
+    }
+    .sample-thumb.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(29,111,235,0.2); }
+    .sample-thumb img { width: 100%; height: 64px; object-fit: cover; display: block; }
+    .sample-thumb span { display: block; font-size: 10px; padding: 3px 5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stages-bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 18px; }
+    @media (max-width: 960px) { .stages-bar { grid-template-columns: repeat(2, 1fr); } }
+    .stage-box {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+    }
+    .stage-box .st-num { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+    .stage-box .st-title { font-size: 13px; font-weight: 700; margin: 2px 0; }
+    .stage-box .st-meta { font-size: 11px; color: var(--muted); }
+    .vis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 960px) { .vis-grid { grid-template-columns: 1fr; } }
+    .vis-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #0f172a; }
+    .vis-card .vis-head { background: #f8fafc; padding: 8px 12px; font-size: 12px; font-weight: 700; border-bottom: 1px solid var(--border); color: var(--text); }
+    .vis-card img { width: 100%; height: 260px; object-fit: contain; display: block; background: #111827; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 720px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+    .kpi { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .kpi .k-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+    .kpi .k-val { font-size: 20px; font-weight: 700; margin-top: 2px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { padding: 8px 8px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { background: #f8fafc; font-weight: 700; color: var(--muted); font-size: 11.5px; }
+    .badge { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+    .badge-on { background: var(--green-soft); color: var(--green); }
+    .badge-off { background: var(--amber-soft); color: var(--amber); }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+    .status-msg { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+    .error-msg { color: #b42318; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NutriQuant: Single-Image 6-Stage Portion, Mass &amp; Energy Demo</h1>
+      <p>Local inference dashboard running Stage 1 (Scale Recovery) &rarr; Stage 2 (SAM 2) &rarr; Stage 3 (ResNet50) &rarr; Stage 4 (Depth Anything V2) &rarr; Stage 5 (DKDF Fusion) &rarr; Stage 6 (Mass &amp; USDA SR28 Energy).</p>
+      <div class="pill-row">
+        <span class="pill" id="runtimePill">Detecting local compute...</span>
+        <span class="pill">10 Cooked-Food Classes</span>
+        <span class="pill">DKDF &lambda;=5.5 | Gate p&ge;0.70</span>
+      </div>
+    </header>
+
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2>1. Input Photo or Real Dataset Sample</h2>
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept="image/*" />
+            <strong>Click to upload a cafeteria meal photo</strong>
+            <div style="font-size:12px; color:var(--muted); margin-top:4px;">or drag and drop JPG / PNG here</div>
+          </div>
+
+          <div class="field">
+            <label>Or select a real NutriQuant-DB sample image:</label>
+            <div class="samples-grid" id="samplesGrid"></div>
+          </div>
+
+          <div class="field">
+            <label for="scaleInput">Optional Planar Scale Override (px/cm)</label>
+            <input type="number" step="0.01" id="scaleInput" placeholder="Auto (fiducial grid / sample metadata / fallback)" />
+          </div>
+
+          <div class="field" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <label for="maxItemsInput">Max Food Items</label>
+              <input type="number" id="maxItemsInput" value="8" min="1" max="20" />
+            </div>
+            <div>
+              <label for="minConfInput">Min Classifier Conf</label>
+              <input type="number" step="0.05" id="minConfInput" value="0.20" min="0" max="0.95" />
+            </div>
+          </div>
+
+          <button class="btn" id="runBtn">Run 6-Stage NutriQuant Pipeline</button>
+          <div class="status-msg" id="statusMsg">Select a real sample or upload an image, then click Run.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="stages-bar">
+          <div class="stage-box">
+            <div class="st-num">Stage 1</div>
+            <div class="st-title">Scale Recovery</div>
+            <div class="st-meta" id="st1Meta">&mdash;</div>
+          </div>
+          <div class="stage-box">
+            <div class="st-num">Stage 2</div>
+            <div class="st-title">SAM 2 Masks</div>
+            <div class="st-meta" id="st2Meta">&mdash;</div>
+          </div>
+          <div class="stage-box">
+            <div class="st-num">Stage 3</div>
+            <div class="st-title">ResNet50 Cls</div>
+            <div class="st-meta" id="st3Meta">&mdash;</div>
+          </div>
+          <div class="stage-box">
+            <div class="st-num">Stage 4</div>
+            <div class="st-title">Depth Anything V2</div>
+            <div class="st-meta" id="st4Meta">&mdash;</div>
+          </div>
+          <div class="stage-box">
+            <div class="st-num">Stage 5</div>
+            <div class="st-title">DKDF Fusion</div>
+            <div class="st-meta" id="st5Meta">&lambda;=5.5 | p&ge;0.70</div>
+          </div>
+          <div class="stage-box">
+            <div class="st-num">Stage 6</div>
+            <div class="st-title">Mass &amp; Energy</div>
+            <div class="st-meta" id="st6Meta">&mdash;</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>2. Visual Pipeline Outputs (Input / SAM 2 / Depth Anything V2)</h2>
+          <div class="vis-grid">
+            <div class="vis-card">
+              <div class="vis-head">Stage 1: Rectified Input</div>
+              <img id="imgRectified" alt="Rectified input preview" />
+            </div>
+            <div class="vis-card">
+              <div class="vis-head">Stage 2 + 3: SAM 2 Masks &amp; Labels</div>
+              <img id="imgSeg" alt="SAM 2 segmentation overlay" />
+            </div>
+            <div class="vis-card">
+              <div class="vis-head">Stage 4: Depth Anything V2 Map</div>
+              <img id="imgDepth" alt="Depth Anything V2 heatmap" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>3. Stage 5 &amp; Stage 6 Quantitative Results</h2>
+          <div class="kpi-row">
+            <div class="kpi"><div class="k-label">Total Fused Volume</div><div class="k-val" id="kpiVol">&mdash;</div></div>
+            <div class="kpi"><div class="k-label">Total Predicted Mass</div><div class="k-val" id="kpiMass">&mdash;</div></div>
+            <div class="kpi"><div class="k-label">Total Est. Energy</div><div class="k-val" id="kpiKcal">&mdash;</div></div>
+            <div class="kpi"><div class="k-label">Runtime (6 Stages)</div><div class="k-val" id="kpiTime">&mdash;</div></div>
+          </div>
+
+          <div id="gtBanner" style="display:none; padding:10px 12px; border-radius:8px; background:var(--accent-soft); font-size:12.5px; margin-bottom:14px;"></div>
+
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Conf (Gate)</th>
+                  <th>Area (cm&sup2;)</th>
+                  <th>V<sub>geo</sub> (cm&sup3;)</th>
+                  <th>V<sub>depth</sub> (cm&sup3;)</th>
+                  <th>q / &alpha;</th>
+                  <th>V&#770; (cm&sup3;)</th>
+                  <th>Density</th>
+                  <th>Mass (g)</th>
+                  <th>Energy (kcal)</th>
+                </tr>
+              </thead>
+              <tbody id="itemsBody">
+                <tr><td colspan="10" style="color:var(--muted); text-align:center;">No results yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedSample = null;
+    let uploadedBase64 = null;
+
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
+    const samplesGrid = document.getElementById("samplesGrid");
+    const scaleInput = document.getElementById("scaleInput");
+    const runBtn = document.getElementById("runBtn");
+    const statusMsg = document.getElementById("statusMsg");
+
+    async function init() {
+      try {
+        const hRes = await fetch("/api/health");
+        if (hRes.ok) {
+          const h = await hRes.json();
+          document.getElementById("runtimePill").textContent =
+            `Compute: ${h.runtime.device.toUpperCase()} (${h.runtime.gpu_name})`;
+        }
+      } catch (e) {
+        document.getElementById("runtimePill").textContent = "Compute: local backend";
+      }
+
+      const sRes = await fetch("/api/samples");
+      const sData = await sRes.json();
+      samplesGrid.innerHTML = "";
+      (sData.samples || []).forEach((s, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "sample-thumb";
+        btn.type = "button";
+        btn.innerHTML = `<img src="/api/sample_image?name=${encodeURIComponent(s.filename)}" loading="lazy" /><span>${s.classes.join(", ")} (${s.total_mass_g ?? "?"}g)</span>`;
+        btn.onclick = () => selectSample(s, btn);
+        samplesGrid.appendChild(btn);
+        if (idx === 0) selectSample(s, btn);
+      });
+    }
+
+    function selectSample(sample, btnEl) {
+      selectedSample = sample.filename;
+      uploadedBase64 = null;
+      document.querySelectorAll(".sample-thumb").forEach(el => el.classList.remove("active"));
+      btnEl.classList.add("active");
+      scaleInput.value = sample.pixel_per_cm || "";
+      document.getElementById("imgRectified").src = `/api/sample_image?name=${encodeURIComponent(sample.filename)}`;
+      statusMsg.textContent = `Selected real sample: ${sample.filename} (${sample.item_count} labeled items, ${sample.total_mass_g} g)`;
+      statusMsg.className = "status-msg";
+    }
+
+    dropZone.onclick = () => fileInput.click();
+    dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add("drag"); };
+    dropZone.ondragleave = () => dropZone.classList.remove("drag");
+    dropZone.ondrop = (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("drag");
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    };
+    fileInput.onchange = () => { if (fileInput.files.length) handleFile(fileInput.files[0]); };
+
+    function handleFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        uploadedBase64 = reader.result;
+        selectedSample = null;
+        scaleInput.value = "";
+        document.querySelectorAll(".sample-thumb").forEach(el => el.classList.remove("active"));
+        document.getElementById("imgRectified").src = uploadedBase64;
+        statusMsg.textContent = `Loaded custom upload: ${file.name}`;
+        statusMsg.className = "status-msg";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    runBtn.onclick = async () => {
+      if (!selectedSample && !uploadedBase64) {
+        statusMsg.textContent = "Please upload an image or pick a real sample first.";
+        statusMsg.className = "status-msg error-msg";
+        return;
+      }
+      runBtn.disabled = true;
+      statusMsg.textContent = "Running SAM 2 -> Depth Anything V2 -> DKDF 6-stage pipeline on local compute...";
+      statusMsg.className = "status-msg";
+
+      try {
+        const payload = {
+          sample_name: selectedSample,
+          image_base64: uploadedBase64,
+          scale_px_per_cm: scaleInput.value ? parseFloat(scaleInput.value) : null,
+          max_items: parseInt(document.getElementById("maxItemsInput").value || "8", 10),
+          min_confidence: parseFloat(document.getElementById("minConfInput").value || "0.20"),
+        };
+        const resp = await fetch("/api/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await resp.json();
+        if (!resp.ok || data.error) {
+          throw new Error(data.error || "Inference failed");
+        }
+        renderResults(data);
+        statusMsg.textContent = `Completed 6 stages in ${data.total_elapsed_s}s (${data.items.length} food items quantified).`;
+      } catch (err) {
+        statusMsg.textContent = "Error: " + err.message;
+        statusMsg.className = "status-msg error-msg";
+      } finally {
+        runBtn.disabled = false;
+      }
+    };
+
+    function renderResults(data) {
+      const s1 = data.stages.stage1_scale_recovery;
+      const s2 = data.stages.stage2_sam2_segmentation;
+      const s3 = data.stages.stage3_recognition;
+      const s4 = data.stages.stage4_depth_anything_v2;
+      const s6 = data.stages.stage6_nutrition_totals;
+
+      document.getElementById("st1Meta").textContent = `${s1.scale_px_per_cm} px/cm (${s1.scale_source})`;
+      document.getElementById("st2Meta").textContent = `${s2.retained_instances} masks (${s2.elapsed_s}s)`;
+      document.getElementById("st3Meta").textContent = `${s3.detected_items} classified`;
+      document.getElementById("st4Meta").textContent = `${s4.encoder} (${s4.elapsed_s}s)`;
+      document.getElementById("st6Meta").textContent = `${s6.total_mass_g} g | ${s6.total_energy_kcal} kcal`;
+
+      document.getElementById("imgRectified").src = data.visual_data_urls.rectified;
+      document.getElementById("imgSeg").src = data.visual_data_urls.segmentation;
+      document.getElementById("imgDepth").src = data.visual_data_urls.depth;
+
+      document.getElementById("kpiVol").textContent = `${s6.total_volume_cm3} cm\u00b3`;
+      document.getElementById("kpiMass").textContent = `${s6.total_mass_g} g`;
+      document.getElementById("kpiKcal").textContent = `${s6.total_energy_kcal} kcal`;
+      document.getElementById("kpiTime").textContent = `${data.total_elapsed_s} s`;
+
+      const gtBanner = document.getElementById("gtBanner");
+      if (data.ground_truth) {
+        const gt = data.ground_truth;
+        const gtItems = gt.items.map(x => `${x.display_name}: ${x.true_mass_g}g`).join(", ");
+        gtBanner.style.display = "block";
+        gtBanner.innerHTML = `<strong>Electronic-Scale Ground Truth (${gt.filename}):</strong> Total <strong>${gt.total_mass_g} g</strong> (~${gt.total_energy_kcal} kcal) &mdash; Components: ${gtItems}`;
+      } else {
+        gtBanner.style.display = "none";
+      }
+
+      const tbody = document.getElementById("itemsBody");
+      if (!data.items || data.items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--muted);">No food components met the threshold. Try lowering Min Classifier Conf.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = data.items.map(it => {
+        const gateCls = it.gate_active ? "badge-on" : "badge-off";
+        const gateTxt = it.gate_active ? `ON (${it.delta_gated >= 0 ? "+" : ""}${it.delta_gated})` : "OFF (0.0)";
+        return `
+          <tr>
+            <td><span class="dot" style="background:${it.color_hex}"></span><strong>#${it.id} ${it.display_name}</strong></td>
+            <td>${(it.confidence * 100).toFixed(1)}% <span class="badge ${gateCls}">${gateTxt}</span></td>
+            <td>${it.area_cm2}</td>
+            <td>${it.v_geo_cm3}</td>
+            <td>${it.v_depth_cm3}</td>
+            <td>q=${it.depth_contrast_q}<br>&alpha;=${it.alpha}</td>
+            <td><strong>${it.v_fused_cm3}</strong></td>
+            <td>${it.density_g_cm3}</td>
+            <td><strong>${it.mass_g}</strong></td>
+            <td><strong>${it.energy_kcal}</strong></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    init();
+  </script>
+</body>
+</html>

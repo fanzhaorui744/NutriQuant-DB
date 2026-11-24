@@ -1,4 +1,4 @@
-egg
+﻿egg
 jirou
 lajiao
 qiezi
@@ -7,5 +7,4 @@ rice
 tofu
 tudou
 tudousi
-xihongshi
 xilanhua

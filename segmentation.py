@@ -4,11 +4,11 @@ import cv2
 import os
 import sys
 
-# Add bundled SAM2 package parent to path
+# Add bundled SAM2 package parent to path (prefer local vendor copy)
 bundle_root = os.path.dirname(os.path.abspath(__file__))
 vendor_root = os.path.join(bundle_root, "vendor")
 if vendor_root not in sys.path:
-    sys.path.append(vendor_root)
+    sys.path.insert(0, vendor_root)
 
 from sam2.build_sam import build_sam2
 from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
